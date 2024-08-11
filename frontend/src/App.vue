@@ -8,6 +8,13 @@
         <button @click="performQuery">Query</button>
       </div>
       <pre>{{ result }}</pre>
+
+      <h2>Accounts</h2>
+      <ul>
+        <li v-for="account in accounts" :key="account.name">
+          {{ account.name }} (Port 1: {{ account.port1 }}, Port 2: {{ account.port2 }})
+        </li>
+      </ul>
     </div>
   </template>
   
@@ -19,6 +26,7 @@
       return {
         result: '',
         query: '',
+        accounts: [],
       }
     },
     methods: {
@@ -33,7 +41,18 @@
       async performQuery() {
         const response = await axios.get(`http://localhost:8080/api/query?query=${this.query}`);
         this.result = JSON.stringify(response.data, null, 2);
+      },
+      async fetchAccounts() {
+        try {
+          const response = await axios.get('http://localhost:8080/api/accounts');
+          this.accounts = response.data;
+        } catch (error) {
+          console.error('Error fetching accounts:', error);
+        }
       }
+    },
+    mounted() {
+      this.fetchAccounts();
     }
   }
   </script>

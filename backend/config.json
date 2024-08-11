@@ -1,0 +1,19 @@
+{
+    "accounts": [
+      {
+        "name": "Account 1",
+        "port1": 8001,
+        "port2": 8002
+      },
+      {
+        "name": "Account 2",
+        "port1": 8003,
+        "port2": 8004
+      },
+      {
+        "name": "Account 3",
+        "port1": 8005,
+        "port2": 8006
+      }
+    ]
+  }
